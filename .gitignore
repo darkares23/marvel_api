@@ -1,0 +1,41 @@
+# misc
+data/
+redis-stable/
+redis*
+urls.cpython
+urls.cpython-*
+eurofxref-hist.*
+
+# macOS
+.DS_Store
+
+# editor configs
+.vscode/
+.idea/
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+#nginx
+nginx/local.crt
+nginx/local.key
+
+# Local history for postgres
+.psql_history
