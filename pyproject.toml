@@ -1,0 +1,92 @@
+[tool.poetry]
+name = "marvel-deps"
+version = "0.1.0"
+description = "rest api to get data from  marvel 3 party api"
+authors = ["Juan <desarrollojuseca@gmail.com>"]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+black = "~=23.1"
+django = "~=4.1"
+djangorestframework = "~=3.14"
+django-environ = "~=0.9.0"
+requests = "~=2.27"
+redis = "^4.5.1"
+uvicorn = "~=0.20.0"
+psycopg2 = "~=2.9"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+pytest = "~=7.1"
+pytest-django = "~=4.5"
+pytest-xdist = "~=3.1"
+ruff = "~=0.0.221"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "marvel_api.settings_test"
+python_files = [
+    "test_*.py",
+]
+norecursedirs = [
+    ".git",
+    ".github",
+    "__pycache__",
+    "nginx",
+    "scripts",
+    "utils",
+]
+filterwarnings = [
+]
+
+[tool.black]
+line-length = 119
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.venv
+)/
+'''
+
+[tool.ruff]
+exclude = [
+    '.git',
+    '__pycache__',
+    'migrations',
+    '.pytest_cache',
+    '.vscode',
+    'htmlcov',
+    'nginx',
+]
+ignore = []
+line-length = 120
+select = [
+    'E',
+    'F',
+    'I',
+    'Q',
+    'W',
+]
+target-version = 'py310'
+
+[tool.ruff.flake8-quotes]
+inline-quotes = 'double'
+
+[tool.ruff.isort]
+force-single-line = true
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = [
+    'I001',
+    'F401',
+]
+
+[build-system]
+requires = ["poetry~=1.0.0"]
+build-backend = "poetry.masonry.api"
