@@ -26,7 +26,7 @@ up: # Ups all the services
 stop:
 	docker-compose down
 
-superuser: # Ups all the services
+superuser: # creates a super user
 	docker-compose run --rm web python manage.py createsuperuser
 
 makemigrations: ## Generate migration files for current models changes
