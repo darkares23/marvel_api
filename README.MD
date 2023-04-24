@@ -45,6 +45,9 @@ The project provides the following endpoints:
 
 You can access the Django admin panel at `/admin/`.
 
+![Captura de pantalla 2023-04-24 a la(s) 6 13 32 p m](https://user-images.githubusercontent.com/45240616/234135395-c15d9cc3-d23f-45e1-8c51-2f0ae1586edf.png)
+
+
 ## Nginx Configuration
 
 The project includes a basic Nginx configuration file located at `./nginx/default.conf`. The Nginx container is set up to serve the Django application using the `uwsgi` protocol. To customize the Nginx configuration, modify the `default.conf` file as needed.
