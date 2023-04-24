@@ -51,6 +51,10 @@ You can access the Django admin panel at `/admin/`.
 
 You can view the data directly in Postgres once you call the 'populate' endpoint, using a Postgres client such as pgAdmin. The port may vary, but it can be viewed in Docker by running the ` docker ps` command and noting the database port number. Additionally, the username and password are 'postgres' and the host is 'localhost'.
 
+<img width="1046" alt="Captura de pantalla 2023-04-24 a la(s) 6 18 54 p m" src="https://user-images.githubusercontent.com/45240616/234136238-b28c4321-0afe-4377-b48a-e2b295db809c.png">
+
+
+
 ## Nginx Configuration
 
 The project includes a basic Nginx configuration file located at `./nginx/default.conf`. The Nginx container is set up to serve the Django application using the `uwsgi` protocol. To customize the Nginx configuration, modify the `default.conf` file as needed.
