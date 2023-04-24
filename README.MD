@@ -15,7 +15,9 @@ By using Celery, we can offload these time-consuming tasks to background workers
 - mkcert
 
 ## Setup
+
 Install mkcert on your system. Please refer to the official documentation for installation instructions for your operating system.
+
 - `sudo make create_certs` Is used to generate local certs for using ssl request locally, You need to install mkcert in order to run this command
 - `make build`: Builds the Docker containers.
 - `make superuser`: Creates a Django superuser allowed to access the admin panel where you can visualize all character data and images.
@@ -47,6 +49,7 @@ You can access the Django admin panel at `/admin/`.
 
 ![Captura de pantalla 2023-04-24 a la(s) 6 13 32 p m](https://user-images.githubusercontent.com/45240616/234135395-c15d9cc3-d23f-45e1-8c51-2f0ae1586edf.png)
 
+You can view the data directly in Postgres once you call the 'populate' endpoint, using a Postgres client such as pgAdmin. The port may vary, but it can be viewed in Docker by running the ` docker ps` command and noting the database port number. Additionally, the username and password are 'postgres' and the host is 'localhost'.
 
 ## Nginx Configuration
 
@@ -68,4 +71,3 @@ Install mkcert on your system. Please refer to the official documentation for in
 - `make migrate`: Applies the Django migrations.
 - `make superuser`: Creates a Django superuser allowed to access the admin panel where you can visualize all character data and images.
 - `make test`: Runs the Django test suite.
-
