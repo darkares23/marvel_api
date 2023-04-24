@@ -93,10 +93,11 @@ DATABASES = {
         "NAME": os.environ.get("POSTGRES_DATABASE", default="postgres"),
         "USER": os.environ.get("POSTGRES_USER", default="postgres"),
         "HOST": os.environ.get("POSTGRES_HOST", default="db"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", default=""),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", default="postgres"),
         "PORT": 5432,
     },
 }
+
 
 REDIS_PORT = os.environ.get("REDIS_PORT", default=6379)
 REDIS_HOST = os.environ.get("REDIS_HOST", default="redis")
@@ -113,6 +114,13 @@ RQ_QUEUES = {
         "PASSWORD": REDIS_PASSWORD,
     }
 }
+
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
 
 
 # Password validation
