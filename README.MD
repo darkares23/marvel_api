@@ -60,6 +60,7 @@ Install mkcert on your system. Please refer to the official documentation for in
 
 ## Makefile Commands
 
+- `sudo make create_certs` Is used to generate local certs for using ssl request locally, You need to install mkcert in order to run this command
 - `make build`: Builds the Docker containers.
 - `make up`: Starts the Docker containers.
 - `make down`: Stops the Docker containers.
