@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-21k*%-56lsr9!1g^70f+bc(eb5-nkdwis_bj=$w($_eg405s#l"
+SECRET_KEY = os.environ.get("SECRET_KEY")
+print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = [
+    "http://0.0.0.0:8000/*",
+    "https://0.0.0.0:8000/*",
+    "http://localhost/*",
+    "https://localhost/*",
+]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,7 +44,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "marvel_api",
+    "investigation",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -75,8 +89,28 @@ WSGI_APPLICATION = "marvel_api.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DATABASE", default="postgres"),
+        "USER": os.environ.get("POSTGRES_USER", default="postgres"),
+        "HOST": os.environ.get("POSTGRES_HOST", default="db"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", default=""),
+        "PORT": 5432,
+    },
+}
+
+REDIS_PORT = os.environ.get("REDIS_PORT", default=6379)
+REDIS_HOST = os.environ.get("REDIS_HOST", default="redis")
+REDIS_TIMEOUT_SECONDS = os.environ.get("REDIS_TIMEOUT_SECONDS", default=3600)
+REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", default=None)
+
+RQ_QUEUES_REDIS_DB = os.environ.get("RQ_QUEUES_REDIS_DB", default=0)
+RQ_QUEUES = {
+    "default": {
+        "HOST": REDIS_HOST,
+        "PORT": REDIS_PORT,
+        "DB": RQ_QUEUES_REDIS_DB,
+        "DEFAULT_TIMEOUT": REDIS_TIMEOUT_SECONDS,
+        "PASSWORD": REDIS_PASSWORD,
     }
 }
 
@@ -116,6 +150,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = "/usr/src/static"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
