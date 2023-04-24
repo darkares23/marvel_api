@@ -51,21 +51,14 @@ services:
     image: redis:6.2
     ports:
       - "6379"
-  rqworker:
-    restart: always
-    build:
-      context: .
+  celery:
+    build: .
+    command: celery -A marvel_impossible_travel worker -l info
     volumes:
-      - .:/usr/src/marvel
-    command: poetry run python3 manage.py rqworker
-    ports:
-      - "4446:4445"
-    container_name: rqworker
-    env_file:
-      - docker-compose.env
+      - .:/app
     depends_on:
+      - db
       - redis
-      - web
 
 volumes:
   db-data:

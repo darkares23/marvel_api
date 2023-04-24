@@ -21,7 +21,7 @@ build: # Build docker images
 	docker-compose build
 
 up: # Ups all the services
-	docker-compose up $(detach) web nginx redis rqworker
+	docker-compose up $(detach) web nginx redis
 
 stop:
 	docker-compose down

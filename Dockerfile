@@ -13,5 +13,6 @@ RUN poetry config virtualenvs.create false
 # RUN poetry install -n --no-ansi
 RUN poetry lock --check && PIP_IGNORE_INSTALLED=1 PIP_USER=1 poetry install
 
+EXPOSE 8000
 # copy project
 COPY . /marvel/
