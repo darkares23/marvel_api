@@ -52,8 +52,9 @@ services:
     ports:
       - "6379"
   celery:
+    container_name: celery
     build: .
-    command: celery -A marvel_impossible_travel worker -l info
+    command: celery -A marvel_api worker -l info
     volumes:
       - .:/app
     depends_on:

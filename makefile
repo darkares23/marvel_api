@@ -21,7 +21,7 @@ build: # Build docker images
 	docker-compose build
 
 up: # Ups all the services
-	docker-compose up $(detach) web nginx redis
+	docker-compose up $(detach) web nginx redis celery
 
 stop:
 	docker-compose down
